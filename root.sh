@@ -73,7 +73,7 @@ RESET_COLOR='\e[0m'
 display_gg() {
   echo -e "${WHITE}___________________________________________________${RESET_COLOR}"
   echo -e ""
-  echo -e "           ${CYAN}-----> Mission Completed ! <----${RESET_COLOR}"
+  echo -e "       ${CYAN}-----> Freeroot Completed ! <----${RESET_COLOR}"
 }
 
 clear
