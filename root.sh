@@ -15,10 +15,10 @@ fi
 if [ ! -e $ROOTFS_DIR/.installed ]; then
   echo "#######################################################################################"
   echo "#"
-  echo "#                          Freeroot Foxytoux INSTALLER"
+  echo "#                    Reborn Freeroot Foxytoux INSTALLER"
   echo "#"
-  echo "#                     Copyright (C) 2024, RecodeStudios.Cloud"
-  echo "#                  Copyright (C) 2025, @BlackCatOfficial (soon)"
+  echo "#                  Copyright (C) 2024, RecodeStudios.Cloud"
+  echo "#                Copyright (C) 2024, @BlackCatOfficial (soon)"
   echo "#"
   echo "#######################################################################################"
   read -p "Do you want to install Ubuntu? (YES/no): " install_ubuntu
@@ -28,10 +28,10 @@ case $install_ubuntu in
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.gz \
       "http://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04-base-${ARCH_ALT}.tar.gz"
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
-    # Add 127.0.0.1 localhost to /etc/hosts
-    echo "127.0.0.1 localhost" >> ${ROOTFS_DIR}/etc/hosts
-    # Auto-install sudo
-    chroot ${ROOTFS_DIR} /bin/bash -c "apt update && apt install -y sudo"
+    # Enter the environment to configure
+    chroot $ROOTFS_DIR /bin/bash -c "apt update && apt install -y systemd systemd-sysv sudo && apt clean"
+    # Add /etc/hosts
+    echo "127.0.0.1 localhost" > $ROOTFS_DIR/etc/hosts
     ;;
   *)
     echo "Skipping Ubuntu installation."
@@ -69,4 +69,7 @@ clear
 display_gg
 $ROOTFS_DIR/usr/local/bin/proot \
   --rootfs="${ROOTFS_DIR}" \
-  -0 -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
+  -0 -w "/root" \
+  -b /dev -b /sys -b /proc -b /etc/resolv.conf -b /etc/hosts \
+  --kill-on-exit \
+  /bin/bash -c "mount -t proc proc /proc && mount -t sysfs sys /sys && mount -t devtmpfs devtmpfs /dev && exec /lib/systemd/systemd"
