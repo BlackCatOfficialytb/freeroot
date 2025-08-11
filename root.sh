@@ -15,10 +15,10 @@ fi
 if [ ! -e $ROOTFS_DIR/.installed ]; then
   echo "#######################################################################################"
   echo "#"
-  echo "#                    Reborn Freeroot Foxytoux INSTALLER"
+  echo "#                     Reborn Freeroot Foxytoux INSTALLER"
   echo "#"
-  echo "#                  Copyright (C) 2024, RecodeStudios.Cloud"
-  echo "#                Copyright (C) 2024, @BlackCatOfficial (soon)"
+  echo "#                   Copyright (C) 2024, RecodeStudios.Cloud"
+  echo "#                 Copyright (C) 2024, @BlackCatOfficial (soon)"
   echo "#"
   echo "#######################################################################################"
   read -p "Do you want to install Ubuntu? (YES/no): " install_ubuntu
@@ -30,7 +30,8 @@ case $install_ubuntu in
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
     # Add localhost to /etc/hosts
     echo "127.0.0.1 localhost" >> ${ROOTFS_DIR}/etc/hosts
-    # Install sudo in the rootfs
+    # Add GPG key for apt
+    wget --tries=$max_retries --timeout=$timeout --no-hsts -O - https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x871920D1991BC93C | gpg --dearmor > ${ROOTFS_DIR}/etc/apt/trusted.gpg.d/ubuntu.gpg
     chroot ${ROOTFS_DIR} /bin/bash -c "apt-get update && apt-get install -y sudo"
     ;;
   *)
@@ -63,8 +64,8 @@ RESET_COLOR='\e[0m'
 display_gg() {
   echo -e "${WHITE}___________________________________________________${RESET_COLOR}"
   echo -e ""
-  echo -e "         ${CYAN}-----> Freeroot Completed ! <----${RESET_COLOR}"
-  echo -e "${CYAN}use apt update --allow-insecure-repositories && apt install <any package> -y --allow-unauthenticated${RESET_COLOR}"
+  echo -e "       ${CYAN}-----> Freeroot Completed ! <----${RESET_COLOR}"
+  echo -e "${CYAN}use apt update && apt install <any package> -y${RESET_COLOR}"
 }
 clear
 display_gg
