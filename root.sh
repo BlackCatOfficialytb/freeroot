@@ -64,6 +64,7 @@ display_gg() {
   echo -e "${WHITE}___________________________________________________${RESET_COLOR}"
   echo -e ""
   echo -e "         ${CYAN}-----> Freeroot Completed ! <----${RESET_COLOR}"
+  echo -e "${CYAN}use apt update --allow-insecure-repositories && apt install <any package> -y --allow-unauthenticated${RESET_COLOR}"
 }
 clear
 display_gg
