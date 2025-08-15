@@ -25,11 +25,11 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
 fi
 case $install_ubuntu in
   [yY][eE][sS])
-    echo "Downloading Ubuntu Minimal image..."
+    echo "Downloading Ubuntu Base image..."
     # The Ubuntu Minimal image is a compressed tarball, which is much simpler
     # to extract than a disk image.
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.xz \
-      "https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-${ARCH_ALT}-root.tar.xz"
+      "https://cdimage.ubuntu.com/ubuntu-base/releases/plucky/release/ubuntu-base-25.04-base-{$ARCH_ALT}.tar.gz"
     
     # Extract the tarball into the rootfs directory
     echo "Extracting files..."
