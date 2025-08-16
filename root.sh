@@ -21,15 +21,15 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
   echo "#                 Copyright (C) 2024, @BlackCatOfficial (soon)"
   echo "#"
   echo "#######################################################################################"
-  read -p "Do you want to install Ubuntu Minimal? (YES/no): " install_ubuntu
+  read -p "Do you want to install Ubuntu Base? (YES/no): " install_ubuntu
 fi
 case $install_ubuntu in
   [yY][eE][sS])
     echo "Downloading Ubuntu Base image..."
-    # The Ubuntu Minimal image is a compressed tarball, which is much simpler
-    # to extract than a disk image.
+    # The Ubuntu Base image is a compressed tarball, which is much simpler
+    # to extract than a Ubuntu Core disk image.
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.xz \
-      "https://cdimage.ubuntu.com/ubuntu-base/releases/plucky/release/ubuntu-base-25.04-base-{$ARCH_ALT}.tar.gz"
+      "https://cdimage.ubuntu.com/ubuntu-base/releases/noble/release/ubuntu-base-24.04.3-base-{$ARCH_ALT}.tar.gz"
     
     # Extract the tarball into the rootfs directory
     echo "Extracting files..."
