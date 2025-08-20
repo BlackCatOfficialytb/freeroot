@@ -28,11 +28,11 @@ case $install_ubuntu in
     echo "Downloading Ubuntu Base image..."
     # The Ubuntu Base image is a compressed tarball, which is much simpler
     # to extract than a Ubuntu Core disk image.
-    # wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.xz \
-    #   "https://cdimage.ubuntu.com/ubuntu-base/releases/noble/release/ubuntu-base-24.04.3-base-{$ARCH_ALT}.tar.gz"
-    # revert back to jammy to fix
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.xz \
-        "https://cdimage.ubuntu.com/ubuntu-base/releases/jammy/release/ubuntu-base-22.04-base-amd64.tar.gz:
+      "https://cdimage.ubuntu.com/ubuntu-base/releases/noble/release/ubuntu-base-24.04.3-base-{$ARCH_ALT}.tar.gz"
+    # revert back to jammy to fix
+    # wget --tries=$max_retries --timeout=$timeout --no-hsts -O /tmp/rootfs.tar.xz \
+        # "https://cdimage.ubuntu.com/ubuntu-base/releases/jammy/release/ubuntu-base-22.04-base-amd64.tar.gz"
     
     # Extract the tarball into the rootfs directory
     echo "Extracting files..."
