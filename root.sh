@@ -91,6 +91,7 @@ display_gg() {
 }
 clear
 display_gg
+mkdir $ROOTFS_DIR/home/user
 $ROOTFS_DIR/usr/local/bin/proot \
   --rootfs="${ROOTFS_DIR}" \
-  -0 -w "/" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
+  -0 -w "/home/user" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
