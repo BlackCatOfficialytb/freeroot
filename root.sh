@@ -5,9 +5,9 @@ max_retries=50
 timeout=1
 ARCH=$(uname -m)
 if [ "$ARCH" = "x86_64" ]; then
-  ARCH_ALT=amd64
+  ARCH_ALT="amd64"
 elif [ "$ARCH" = "aarch64" ]; then
-  ARCH_ALT=arm64
+  ARCH_ALT="arm64"
 else
   printf "Unsupported CPU architecture: ${ARCH}"
   exit 1
